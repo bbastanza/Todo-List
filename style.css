@@ -1,0 +1,60 @@
+body {
+    font-family: monospace;
+    background-color: black;
+} 
+
+header {
+    color: lightgreen;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px auto;
+    border: 5px lightblue solid;
+    border-radius: 30px;
+    width: 500px;
+    background-color: #1C1C1C;
+    padding: 0;
+
+
+}
+
+h2 {
+    color: lightgreen;
+    text-align: center;
+    margin: 0px auto;
+    font-size: 40px;
+    text-decoration: underline;
+}
+
+#buttonLayout {
+
+    margin: 20px auto;
+    color: lightblue;
+    background-color: #1C1C1C;
+    width: 350px;
+    text-align: center;
+    display: flex;
+
+}
+
+
+h2 {
+    color: lightgreen;
+    text-align: center;
+    margin: 0px auto;
+    font-size: 40px;
+    text-decoration: underline;
+}
+
+h3 {
+    color: lightgreen;
+    text-align: center;
+    margin: 20px auto;
+    font-size: 20px;
+}
+.button {
+    background-color: black;
+    color: lightblue;
+    text-align: center;
+    margin: auto;
+
+}
