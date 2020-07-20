@@ -2,17 +2,11 @@ document.addEventListener('DOMContentLoaded', function () {
     todo();
 });
 
-document.getElementById("addToList").addEventListener("click", function () {
-    addToArray();
-});
+let addToListVar = document.getElementById("addToList").addEventListener("click", addToArray);
 
-document.getElementById("clearDone").addEventListener("click", function () {
-    clearDone();
-});
+let clearDoneVar = document.getElementById("clearDone").addEventListener("click", clearDone);
 
-document.getElementById("clearAll").addEventListener("click", function () {
-    clearAll();
-});
+let clearAllVar = document.getElementById("clearAll").addEventListener("click", clearAll);
 
 let recall = false
 
@@ -26,18 +20,18 @@ function todo() {
 let todoArray = ["active learn", "passive learn"];
 
 
-function addToArray() {
-    let newItem = " " + "item"
+function addToArray(e) {
+    todoArray.push("newitem")
+    console.log(e.target)
 
-    console.log(newItem)
-    if (newItem == Array.isArray(todoArray)) {
-        alertMessage = document.getElementById("responce")
-        alertMessage = "Item Already Listed"
-    } else {
-        todoArray.push(newItem)
-    }
+    // if (newItem == Array.isArray(todoArray)) {
+    //     alertMessage = document.getElementById("responce")
+    //     alertMessage = "Item Already Listed"
+    // } else {
+    //     todoArray.push(newItem)
+    // }
     displayTodos();
-    updateJson();
+    // updateJson();
 }
 
 function strikeOut() {
@@ -62,17 +56,29 @@ function clearAll() {
     updateJson();
 }
 
-/// DEF NEED TO RELOOK AT THIS. I THINK I'M ON THE RIGHT TRACK THOUGH :)
+
 // this will take the info in the todoList and display it on the webpage
+
+// I WANT THIS TO DISPLAY THE COMPLETE LIST BY ITSELF WITHOUT THE LIST BEFORE THE UPDATE 
 function displayTodos() {
-    // let list = document.querySelector(items.todo)
-    // list = todoArray
-    let todo = document.getElementById("todo")
-    todo.textContent = todoArray
-    for (i = 0; 1 < list.length; i++) {
-        textBox.insertBefore(textBox, todo)
+
+
+    for (i = 0; i < todoArray.length; i++) {
+
+
+        let newItem = document.createElement('li');
+        let newItemText = document.createTextNode((i + 1 + ": ") + todoArray[i]);
+
+        newItem.appendChild(newItemText);
+        console.log(newItem)
+        let container = document.querySelector('.container #itemList')
+        let end = document.querySelector("#container #end")
+        container.insertBefore(newItem, end)
+
+        console.log(itemList)
+
     }
-    console.log(todoArray)
+
 
 }
 
@@ -85,7 +91,7 @@ function displayTodos() {
 
 
 
-/////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////// WHEN THE REST IS DONE
 function findJson() {
     // looks for json file... maybe handleing error of file not found to point to makeJson
     if (recall = true) {
