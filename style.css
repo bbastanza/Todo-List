@@ -58,3 +58,16 @@ h3 {
     margin: auto;
 
 }
+
+.container {
+    text-align: center;
+    background-color: black;
+    color: green;
+    margin: auto;
+    font-size: 20px;
+    width: 400px;
+}
+
+.itemList {
+    background-color: black;
+}

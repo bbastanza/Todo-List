@@ -8,6 +8,11 @@ let clearDoneVar = document.getElementById("clearDone").addEventListener("click"
 
 let clearAllVar = document.getElementById("clearAll").addEventListener("click", clearAll);
 
+let addEnter = document.getElementById('addToList').addEventListener('keydown', function (e) {
+    if (e.keyCode === 13) {
+    }
+});
+
 let recall = false
 
 function todo() {
@@ -17,12 +22,14 @@ function todo() {
 
 
 // empty array where items on list will be located
-let todoArray = ["active learn", "passive learn"];
+let todoArray = [];
 
 
-function addToArray(e) {
-    todoArray.push("newitem")
-    console.log(e.target)
+function addToArray() {
+    let itemToAdd = document.getElementById("textBox").value;
+    todoArray.push(itemToAdd)
+
+
 
     // if (newItem == Array.isArray(todoArray)) {
     //     alertMessage = document.getElementById("responce")
@@ -30,7 +37,10 @@ function addToArray(e) {
     // } else {
     //     todoArray.push(newItem)
     // }
-    displayTodos();
+    displayNewItem(itemToAdd);
+    document.getElementById("textBox").value = " "
+
+
     // updateJson();
 }
 
@@ -57,8 +67,24 @@ function clearAll() {
 }
 
 
-// this will take the info in the todoList and display it on the webpage
 
+// display a new item
+function displayNewItem(itemToAdd) {
+
+    let newItem = document.createElement('li');
+    let newItemText = document.createTextNode(itemToAdd);
+    newItem.appendChild(newItemText);
+    let container = document.querySelector('.container #itemList')
+    let end = document.querySelector("#container #end")
+    container.insertBefore(newItem, end)
+
+}
+
+
+
+
+
+// this will take the info in the todoList and display it on the webpage
 // I WANT THIS TO DISPLAY THE COMPLETE LIST BY ITSELF WITHOUT THE LIST BEFORE THE UPDATE 
 function displayTodos() {
 
@@ -66,14 +92,14 @@ function displayTodos() {
     for (i = 0; i < todoArray.length; i++) {
 
 
-        let newItem = document.createElement('li');
-        let newItemText = document.createTextNode((i + 1 + ": ") + todoArray[i]);
+        let item = document.createElement('li');
+        let itemText = document.createTextNode(todoArray[i]);
 
-        newItem.appendChild(newItemText);
-        console.log(newItem)
+        item.appendChild(itemText);
+        console.log(item)
         let container = document.querySelector('.container #itemList')
         let end = document.querySelector("#container #end")
-        container.insertBefore(newItem, end)
+        container.insertBefore(item, end)
 
         console.log(itemList)
 
