@@ -8,8 +8,9 @@ let clearDoneVar = document.getElementById("clearDone").addEventListener("click"
 
 let clearAllVar = document.getElementById("clearAll").addEventListener("click", clearAll);
 
-let addEnter = document.getElementById('addToList').addEventListener('keydown', function (e) {
-    if (e.keyCode === 13) {
+let addEnter = document.getElementById('textBox').addEventListener('keypress', function (e) {
+    if (e.key === "Enter") {
+        addToArray();
     }
 });
 
@@ -30,7 +31,6 @@ function addToArray() {
     todoArray.push(itemToAdd)
 
 
-
     // if (newItem == Array.isArray(todoArray)) {
     //     alertMessage = document.getElementById("responce")
     //     alertMessage = "Item Already Listed"
@@ -38,7 +38,7 @@ function addToArray() {
     //     todoArray.push(newItem)
     // }
     displayNewItem(itemToAdd);
-    document.getElementById("textBox").value = " "
+    document.getElementById("textBox").value = ""
 
 
     // updateJson();
