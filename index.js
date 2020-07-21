@@ -11,10 +11,23 @@ document.getElementById("clearAll").addEventListener("click", clearAll);
 document.getElementById('textBox').addEventListener('keypress', function (e) {
     if (e.key === "Enter") {
         addToArray();
-        strikeOut();
     }
 });
 
+////strikeout
+document.addEventListener('dblclick', function (e) {
+    e = e || window.event;
+    let target = e.target || e.srcElement;
+    if (target.id > 0) {
+        if (target.className != "strikeOut") {
+            target.className = "strikeOut"
+        } else {
+            target.className = "notStrikeOut"
+        }
+
+    }
+
+});
 
 let recall = false
 
@@ -39,15 +52,6 @@ function addToArray() {
 }
 
 
-function strikeOut() {
-    console.log("strike")
-    let clickItem = document.getElementById("1")
-    clickItem.className = strikeOut
-    updateJson();
-}
-
-
-
 // clears entire array// DONE
 function clearAll() {
     todoArray = [];
@@ -63,21 +67,23 @@ function clearAll() {
 function displayNewItem(itemToAdd) {
 
     let newItem = document.createElement('li');
+
     newItem.id = todoArray.length
-    console.log(newItem.id)
+
     let newItemText = document.createTextNode(itemToAdd);
     newItem.appendChild(newItemText);
+
     let container = document.querySelector('.container #itemList')
     let end = document.querySelector("#container #end")
     container.insertBefore(newItem, end)
 
+
 }
 
 function clearDone() {
-    // checks to see what is struckout and removes them from list
-    // maybe compares list doneList and deletes OR
-    // checks to see the font style and deletes those items
-    displayTodos();
+    let strikes = document.getElementsByClassName("strikeOut")
+
+
     updateJson();
 }
 
