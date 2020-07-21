@@ -62,7 +62,7 @@ h3 {
 .container {
     text-align: left;
     background-color: transparent;
-    color: green;
+    color: seagreen;
     margin: auto;
     font-size: 20px;
     width: 300px;
@@ -74,9 +74,14 @@ h3 {
     width: 300px;
     font-family: sans-serif;
     font-weight: bold;
+
 }
 
 #end {
     font-size: 1px;
     margin: 0;
+}
+
+.strikeOut {
+    text-decoration: line-through;
 }

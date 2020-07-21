@@ -2,17 +2,19 @@ document.addEventListener('DOMContentLoaded', function () {
     todo();
 });
 
-let addToListVar = document.getElementById("addToList").addEventListener("click", addToArray);
+document.getElementById("addToList").addEventListener("click", addToArray);
 
-let clearDoneVar = document.getElementById("clearDone").addEventListener("click", clearDone);
+document.getElementById("clearDone").addEventListener("click", clearDone);
 
-let clearAllVar = document.getElementById("clearAll").addEventListener("click", clearAll);
+document.getElementById("clearAll").addEventListener("click", clearAll);
 
-let addEnter = document.getElementById('textBox').addEventListener('keypress', function (e) {
+document.getElementById('textBox').addEventListener('keypress', function (e) {
     if (e.key === "Enter") {
         addToArray();
+        strikeOut();
     }
 });
+
 
 let recall = false
 
@@ -28,15 +30,7 @@ let todoArray = [];
 
 function addToArray() {
     let itemToAdd = document.getElementById("textBox").value;
-    todoArray.push(itemToAdd)
-
-
-    // if (newItem == Array.isArray(todoArray)) {
-    //     alertMessage = document.getElementById("responce")
-    //     alertMessage = "Item Already Listed"
-    // } else {
-    //     todoArray.push(newItem)
-    // }
+    todoArray.push(itemToAdd);
     displayNewItem(itemToAdd);
     document.getElementById("textBox").value = ""
 
@@ -44,24 +38,21 @@ function addToArray() {
     // updateJson();
 }
 
+
 function strikeOut() {
-    // if item is clicked item is struckout-> changing html font of item
-    // maybe add to another list that can be cleared by another function
-    displayTodos();
+    console.log("strike")
+    let clickItem = document.getElementById("1")
+    clickItem.className = strikeOut
     updateJson();
 }
 
-function clearDone() {
-    // checks to see what is struckout and removes them from list
-    // maybe compares list doneList and deletes OR
-    // checks to see the font style and deletes those items
-    displayTodos();
-    updateJson();
-}
+
 
 // clears entire array// DONE
 function clearAll() {
     todoArray = [];
+    let ol = document.getElementById("itemList")
+    ol.innerHTML = ""
     displayTodos();
     updateJson();
 }
@@ -72,6 +63,8 @@ function clearAll() {
 function displayNewItem(itemToAdd) {
 
     let newItem = document.createElement('li');
+    newItem.id = todoArray.length
+    console.log(newItem.id)
     let newItemText = document.createTextNode(itemToAdd);
     newItem.appendChild(newItemText);
     let container = document.querySelector('.container #itemList')
@@ -80,12 +73,18 @@ function displayNewItem(itemToAdd) {
 
 }
 
-
+function clearDone() {
+    // checks to see what is struckout and removes them from list
+    // maybe compares list doneList and deletes OR
+    // checks to see the font style and deletes those items
+    displayTodos();
+    updateJson();
+}
 
 
 
 // this will take the info in the todoList and display it on the webpage
-// I WANT THIS TO DISPLAY THE COMPLETE LIST BY ITSELF WITHOUT THE LIST BEFORE THE UPDATE 
+
 function displayTodos() {
 
 
