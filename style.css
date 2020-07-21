@@ -10,7 +10,7 @@ header {
     margin: 20px auto;
     border: 5px lightblue solid;
     border-radius: 30px;
-    width: 500px;
+    width: 250px;
     background-color: #1C1C1C;
     padding: 0;
 
@@ -36,10 +36,15 @@ header {
 }
 
 .button {
-    background-color: transparent;
-    color: lightblue;
+    background-color: #1C1C1C;
+    color: lightgreen;
     text-align: center;
     margin: auto;
+    border: solid lightblue 3px;
+    border-radius: 30px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: medium;
 
 }
 

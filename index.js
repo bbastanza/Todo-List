@@ -48,7 +48,7 @@ function addToArray() {
     document.getElementById("textBox").value = ""
 
 
-    // updateJson();
+    updateJson();
 }
 
 
@@ -81,7 +81,13 @@ function displayNewItem(itemToAdd) {
 }
 
 function clearDone() {
-    let strikes = document.getElementsByClassName("strikeOut")
+    let itemList = document.getElementById("itemList")
+    let strike = document.getElementsByClassName("strikeOut")
+    console.log(itemList)
+    console.log(strike)
+    if (strike) {
+        itemList.removeChild(strike)
+    }
 
 
     updateJson();
@@ -90,7 +96,6 @@ function clearDone() {
 
 
 // this will take the info in the todoList and display it on the webpage
-
 function displayTodos() {
 
 
@@ -105,8 +110,6 @@ function displayTodos() {
         let container = document.querySelector('.container #itemList')
         let end = document.querySelector("#container #end")
         container.insertBefore(item, end)
-
-        console.log(itemList)
 
     }
 
