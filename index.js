@@ -80,6 +80,11 @@ function displayNewItem(itemToAdd) {
 
 }
 
+
+
+/// HERE IS WHERE I AM STUCK ///
+/// I HAVE TRIED A FEW DIFFERENT METHODS TO REMOVE THESE ITEMS 
+/// BUT I'VE COME UP SHORT FOR A COUPLE OF HOURS
 function clearDone() {
     let itemList = document.getElementById("itemList")
     let strike = document.getElementsByClassName("strikeOut")
