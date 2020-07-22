@@ -42,6 +42,15 @@ document.addEventListener('dblclick', function (e) {
 
 
 
+function todo() {
+    displayTodos(todoArray);
+}
+
+
+// empty array where items on list will be located
+
+
+
 function addToArray() {
     let itemToAdd = document.getElementById("textBox").value;
     todoArray.push(itemToAdd);
@@ -84,17 +93,28 @@ function displayNewItem(itemToAdd, todoArray) {
 
 
 // clears items that have been struckout
-function clearDone(todoArray) {
-    let items = document.getElementsByTagName('li')
+function clearDone() {
+    let item = document.getElementsByTagName('li')
     let itemList = document.getElementById('itemList')
-
-    let newArray = Array.from(items)
+    let newArray = Array.from(item)
     for (i = 0; i < newArray.length; i++) {
         if (newArray[i].className === "strikeOut") {
             itemList.removeChild(newArray[i])
+            delete todoArray[i]
+
+
+
         }
     }
+    let newTodoArray = [];
+    for (i = 0; i < todoArray.length; i++) {
+        if (todoArray[i] != null) {
+            newTodoArray.push(todoArray[i])
 
+        }
+    }
+    console.log(newTodoArray)
+    window.localStorage.setItem('list', JSON.stringify(newTodoArray));
 }
 
 
@@ -120,3 +140,11 @@ function displayTodos(todoArray) {
 
 
 }
+
+
+
+
+
+
+
+
