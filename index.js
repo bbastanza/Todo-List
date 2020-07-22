@@ -1,5 +1,13 @@
+let todoArray = JSON.parse(window.localStorage.getItem('list'));
+if (todoArray === null) {
+    todoArray = [];
+}
+
+console.log(todoArray)
+
+
 document.addEventListener('DOMContentLoaded', function () {
-    todo();
+    displayTodos(todoArray);
 });
 
 document.getElementById("addToList").addEventListener("click", addToArray);
@@ -13,6 +21,9 @@ document.getElementById('textBox').addEventListener('keypress', function (e) {
         addToArray();
     }
 });
+
+
+
 
 ////strikeout
 document.addEventListener('dblclick', function (e) {
@@ -29,26 +40,15 @@ document.addEventListener('dblclick', function (e) {
 
 });
 
-let recall = false
-
-function todo() {
-    findJson();
-    displayTodos();
-}
-
-
-// empty array where items on list will be located
-let todoArray = [];
 
 
 function addToArray() {
     let itemToAdd = document.getElementById("textBox").value;
     todoArray.push(itemToAdd);
-    displayNewItem(itemToAdd);
+    displayNewItem(itemToAdd, todoArray);
     document.getElementById("textBox").value = ""
 
 
-    updateJson();
 }
 
 
@@ -57,14 +57,14 @@ function clearAll() {
     todoArray = [];
     let ol = document.getElementById("itemList")
     ol.innerHTML = ""
-    displayTodos();
-    updateJson();
+    displayTodos(todoArray);
+    window.localStorage.setItem('list', JSON.stringify(todoArray))
 }
 
 
 
 // display a new item
-function displayNewItem(itemToAdd) {
+function displayNewItem(itemToAdd, todoArray) {
 
     let newItem = document.createElement('li');
 
@@ -76,42 +76,42 @@ function displayNewItem(itemToAdd) {
     let container = document.querySelector('.container #itemList')
     let end = document.querySelector("#container #end")
     container.insertBefore(newItem, end)
+    window.localStorage.setItem('list', JSON.stringify(todoArray));
+
 
 
 }
 
 
 // clears items that have been struckout
-function clearDone() {
-    let item = document.getElementsByTagName('li')
+function clearDone(todoArray) {
+    let items = document.getElementsByTagName('li')
     let itemList = document.getElementById('itemList')
 
-    let newArray = Array.from(item)
+    let newArray = Array.from(items)
     for (i = 0; i < newArray.length; i++) {
-        if (newArray[i].className == "strikeOut") {
+        if (newArray[i].className === "strikeOut") {
             itemList.removeChild(newArray[i])
-
         }
     }
 
-
-    updateJson();
 }
 
 
 
 // this will take the info in the todoList and display it on the webpage
-function displayTodos() {
+function displayTodos(todoArray) {
 
 
     for (i = 0; i < todoArray.length; i++) {
 
 
         let item = document.createElement('li');
+        item.id = todoArray.length
         let itemText = document.createTextNode(todoArray[i]);
 
         item.appendChild(itemText);
-        console.log(item)
+
         let container = document.querySelector('.container #itemList')
         let end = document.querySelector("#container #end")
         container.insertBefore(item, end)
@@ -119,38 +119,4 @@ function displayTodos() {
     }
 
 
-}
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////// WHEN THE REST IS DONE
-function findJson() {
-    // looks for json file... maybe handleing error of file not found to point to makeJson
-    if (recall = true) {
-        recallJson();
-    } else {
-        makeJson();
-    }
-
-}
-
-
-function recallJson() {
-    // checks to see if json file exists
-    // takes info from json file and adds it to list
-}
-
-function makeJson() {
-    // creates a json file and loads its content
-}
-
-function updateJson() {
-    // rewrites the json file with current list
 }
