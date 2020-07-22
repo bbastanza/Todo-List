@@ -81,17 +81,17 @@ function displayNewItem(itemToAdd) {
 }
 
 
-
-/// HERE IS WHERE I AM STUCK ///
-/// I HAVE TRIED A FEW DIFFERENT METHODS TO REMOVE THESE ITEMS 
-/// BUT I'VE COME UP SHORT FOR A COUPLE OF HOURS
+// clears items that have been struckout
 function clearDone() {
-    let itemList = document.getElementById("itemList")
-    let strike = document.getElementsByClassName("strikeOut")
-    console.log(itemList)
-    console.log(strike)
-    if (strike) {
-        itemList.removeChild(strike)
+    let item = document.getElementsByTagName('li')
+    let itemList = document.getElementById('itemList')
+
+    let newArray = Array.from(item)
+    for (i = 0; i < newArray.length; i++) {
+        if (newArray[i].className == "strikeOut") {
+            itemList.removeChild(newArray[i])
+
+        }
     }
 
 
