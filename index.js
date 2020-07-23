@@ -30,8 +30,7 @@ document.getElementById('textBox').addEventListener('keypress', function (e) {
 // this is used to strikeout the item by changeing classname on a click
 // this also adds the "state" of the item to local storage
 document.addEventListener('click', function (e) {
-    e = e || window.event;
-    let target = e.target || e.srcElement;
+    let target = e.target;
     for (i = 0; i < todoArray.length; i++) {
 
         if (todoArray[i] == target.id) {
