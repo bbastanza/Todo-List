@@ -91,11 +91,14 @@ function clearDone() {
     let item = document.getElementsByTagName('li');
     let itemList = document.getElementById('itemList');
     let newArray = Array.from(item);
-
+    // changes the value back to notStrikeOut when it is deleted so if it is entered again it can remain "notComlete"
     for (i = 0; i < newArray.length; i++) {
         if (newArray[i].className === "strikeOut") {
+            newArray[i].className = "notStrikeOut";
+            localStorage.setItem(newArray[i].id, "notComplete");
             itemList.removeChild(newArray[i]);
             delete todoArray[i];
+
         }
     }
 
@@ -107,7 +110,8 @@ function clearDone() {
 
         }
     }
-    window.localStorage.setItem('list', JSON.stringify(newTodoArray));
+    todoArray = newTodoArray
+    window.localStorage.setItem('list', JSON.stringify(todoArray));
 }
 
 
@@ -119,7 +123,7 @@ function displayTodos(todoArray) {
         // this sets the variable itemState to "isComplete" or "notComplete" by the key that was set to the items name
         let itemState = localStorage.getItem(todoArray[i])
         let item = document.createElement('li');
-        console.log(itemState)
+
 
         // this compare the itemState(which is the local storage value)
         if (itemState === "isComplete") {

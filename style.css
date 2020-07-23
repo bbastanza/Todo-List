@@ -20,10 +20,11 @@ header {
 #textBox {
     border: lightgreen 1px solid;
     text-align: center;
-    background-color: lightgray;
+    background-color: #8EE3C6;
     color: black;
     width: 350px;
     padding:5px;
+    font-weight: bold;
 }
 
 #buttonLayout {
@@ -58,7 +59,7 @@ header {
     color: lightgreen;
     margin: auto;
     font-size: 20px;
-    width: 550px;
+    width: 450px;
 }
 
 #itemList {
@@ -67,7 +68,8 @@ header {
     width: 400px;
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
+    margin-left: 30px;
 
 }
 
