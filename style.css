@@ -98,3 +98,7 @@ header {
 li {
     cursor: pointer;
 }
+
+#textBox {
+    border-radius: 20px;
+}
