@@ -5,9 +5,10 @@
 
 ![js](MDimages/javascript.png) ![html](MDimages/html.png) ![css](MDimages/css.png)
 
----
+Check out the app [here](https://bbastanza.github.io/todo/)
 
  ![Screenshot](MDimages/screenshot.png)
+
 
 
 ## Summary
