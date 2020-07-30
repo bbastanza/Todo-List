@@ -1,95 +1,51 @@
 //
 // Project #2 - Todo Application
 //
-// this sets the main array to info from the local storage
-// if there is no local storage made yet the main array is created
-let todoArray = JSON.parse(window.localStorage.getItem('list'));
-if (todoArray === null) {
-    todoArray = [];
-}
+
 
 // this calls the first function when the page is loaded
 document.addEventListener('DOMContentLoaded', function () {
+    let todoArray = getSavedTodos();
+
     displayTodos(todoArray);
 });
 
 // these handle the three buttons and the button press 'Enter' to triggar functions
-document.getElementById("addToList").addEventListener("click", addToArray);
+document.getElementById("add-to-list").addEventListener("click", createNewTodoItem);
 
-document.getElementById("clearDone").addEventListener("click", clearDone);
-
-document.getElementById("clearAll").addEventListener("click", clearAll);
-
-document.getElementById('textBox').addEventListener('keypress', function (e) {
+document.getElementById('text-box').addEventListener('keypress', function (e) {
     if (e.key === "Enter") {
-        addToArray();
+        createNewTodoItem();
     }
 });
 
+// this gets the value from the textbox and adds it to the new array/ clears list innerHTML and redisplays items
+function createNewTodoItem() {
+    let todoItemText = document.getElementById("text-box").value;
 
-// this is used to strikeout the item by changeing classname on a click
-// this also adds the "state" of the item to local storage
-document.addEventListener('click', function (e) {
-    let target = e.target;
-    for (i = 0; i < todoArray.length; i++) {
+    if (todoItemText === "") return;
 
-        if (todoArray[i] == target.id) {
-            if (target.className != "strikeOut") {
-                target.className = "strikeOut";
-                localStorage.setItem(target.id, "isComplete");
-            } else {
-                target.className = "notStrikeOut";
-                localStorage.setItem(target.id, "notComplete");
-            }
-
-        }
+    const todoItem = {
+        id: new Date().getTime() * Math.random(),
+        text: todoItemText,
+        isComplete: false,
     }
-});
 
-
-// this gets the value from the textbox and adds it to the new array and 
-// passes the information to the displayNewItem function
-function addToArray() {
-    let itemToAdd = document.getElementById("textBox").value;
-    if (itemToAdd !== "") {
-        todoArray.push(itemToAdd);
-        displayNewItem(itemToAdd, todoArray);
-        document.getElementById("textBox").value = ""
-    }
-}
-
-// display a new item and updates the local storage
-function displayNewItem(itemToAdd, todoArray) {
-
-    let newItem = document.createElement('li');
-
-    newItem.id = todoArray[todoArray.length - 1];
-
-    let newItemText = document.createTextNode(itemToAdd);
-    newItem.appendChild(newItemText);
-
-    let container = document.querySelector('.container #itemList');
-    let end = document.querySelector("#container #end");
-    container.insertBefore(newItem, end);
-
+    let todoArray = getSavedTodos();
+    todoArray.push(todoItem);
+    document.querySelector("#item-list").innerHTML = ""
+    displayTodos(todoArray)
+    document.getElementById("text-box").value = ""
     window.localStorage.setItem('list', JSON.stringify(todoArray));
+
 }
 
 
-// clears entire array and updates the local storage to a blank array
-function clearAll() {
-    todoArray = [];
-    let ol = document.getElementById("itemList");
-    ol.innerHTML = ""
-    displayTodos(todoArray);
-    window.localStorage.setItem('list', JSON.stringify(todoArray));
-}
+document.getElementById("clear-done").addEventListener("click", function (e) {
+    let todoArray = getSavedTodos();
 
-
-// clears items that have been struckout by checking class type and removing them
-function clearDone() {
     let item = document.getElementsByTagName('li');
-    let itemList = document.getElementById('itemList');
+    let itemList = document.getElementById('item-list');
     let newArray = Array.from(item);
     // changes the value back to notStrikeOut when it is deleted so if it is entered again it can remain "notComlete"
     for (i = 0; i < newArray.length; i++) {
@@ -98,7 +54,6 @@ function clearDone() {
             localStorage.setItem(newArray[i].id, "notComplete");
             itemList.removeChild(newArray[i]);
             delete todoArray[i];
-
         }
     }
 
@@ -112,33 +67,70 @@ function clearDone() {
     }
     todoArray = newTodoArray
     window.localStorage.setItem('list', JSON.stringify(todoArray));
+});
+
+document.getElementById("clear-all").addEventListener("click", function (e) {
+    const todoArray = [];
+
+    let ol = document.getElementById("item-list");
+    ol.innerHTML = "";
+
+    displayTodos(todoArray);
+
+    window.localStorage.setItem('list', JSON.stringify(todoArray));
+});
+
+
+function getSavedTodos() {
+    let savedTodos = JSON.parse(window.localStorage.getItem('list'));
+    if (savedTodos === null) {
+        savedTodos = [];
+    }
+    return savedTodos;
 }
 
+// this is used to strikeout the item by changeing classname on a click
+document.addEventListener('click', function (e) {
+    const todoArray = getSavedTodos();
 
-// this will take the initial todoList and display it on the webpage
+    let target = e.target;
+    for (i = 0; i < todoArray.length; i++) {
+
+        if (todoArray[i].id.toString() === target.id) {
+
+            todoArray[i].isComplete = !todoArray[i].isComplete;
+
+            if (todoArray[i].isComplete === true) {
+                target.className = "strikeOut";
+            } else {
+                target.className = "notStrikeOut";
+            }
+
+        }
+    }
+    window.localStorage.setItem('list', JSON.stringify(todoArray));
+});
+
+
+// this will take the todoList and display it on the webpage
 function displayTodos(todoArray) {
 
     for (i = 0; i < todoArray.length; i++) {
 
         // this sets the variable itemState to "isComplete" or "notComplete" by the key that was set to the items name
-        let itemState = localStorage.getItem(todoArray[i])
         let item = document.createElement('li');
 
-
         // this compare the itemState(which is the local storage value)
-        if (itemState === "isComplete") {
-            item.className = "strikeOut";
-        } else {
-            item.className = "notStrikeOut"
-        }
+        item.className = todoArray[i].isComplete === true
+            ? "strikeOut"
+            : "notStrikeOut";
 
-        let itemText = document.createTextNode(todoArray[i]);
-        item.id = todoArray[i];
+        let itemText = document.createTextNode(todoArray[i].text);
+        item.id = todoArray[i].id
         item.appendChild(itemText);
 
-        let container = document.querySelector('.container #itemList');
+        let container = document.querySelector('.container #item-list');
         let end = document.querySelector("#container #end");
         container.insertBefore(item, end);
-
     }
 }

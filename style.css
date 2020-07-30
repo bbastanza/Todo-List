@@ -17,7 +17,7 @@ header {
 
 }
 
-#textBox {
+#text-box {
     border: lightgreen 1px solid;
     text-align: center;
     background-color: #8EE3C6;
@@ -25,17 +25,16 @@ header {
     width: 350px;
     padding:5px;
     font-weight: bold;
+    border-radius: 20px;
 }
 
-#buttonLayout {
-
+#button-layout {
     margin: 20px auto;
     color: lightblue;
     background-color: transparent;
     width: 350px;
     text-align: center;
     display: flex;
-
 }
 
 .button {
@@ -63,7 +62,7 @@ header {
     width: 450px;
 }
 
-#itemList {
+#item-list {
     background-color: transparent;
     text-align: left;
     width: 400px;
@@ -97,8 +96,4 @@ header {
 
 li {
     cursor: pointer;
-}
-
-#textBox {
-    border-radius: 20px;
 }
