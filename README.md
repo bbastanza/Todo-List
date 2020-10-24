@@ -22,6 +22,6 @@ The biggest roadblock I encountered at the time was how to keep class changes in
 
 ### Brian Bastanza- Full Stack Web Developer
 
-[Personal Website](www.brianbastanza.com)
+[Personal Website](www.brianbastanza.me)
 
 [LinkedIn](www.linkedin.com/in/brian-bastanza-9035397b)
