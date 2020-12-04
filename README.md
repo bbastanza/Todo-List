@@ -25,4 +25,4 @@ The biggest roadblock I encountered at the time was how to keep class changes in
 
 <a href="https://www.brianbastanza.me/" target="_blank" rel="noopener">Personal Website</a>
 
-[LinkedIn](www.linkedin.com/in/bbastanza)
+[LinkedIn](https://www.linkedin.com/in/bbastanza)
